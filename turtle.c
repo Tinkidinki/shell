@@ -6,6 +6,8 @@
 #include <sys/wait.h>
 #include <limits.h>
 
+#include "inbuilts.h"
+
 int get_home_directory(){
 
 }
@@ -20,31 +22,6 @@ int display_prompt(){
         perror("getcwd() error");
     }
     
-}
-
-int cd(char **args){
-    printf("cd function called\n");
-
-    // if (strcpy(args[1], ".")==0){
-    //     //
-    // }
-
-    if (chdir(args[1]) != 0){
-        perror("turtle: ");
-    }
-
-    return 1;
-}
-
-int pwd(){
-    char directory[PATH_MAX];
-    printf ("pwd called\n");
-    if (getcwd(directory, sizeof(directory))!=NULL){
-        printf("%s\n", directory);
-    }
-    else{
-        perror("getcwd() error");
-    }
 }
 
 int turtle_execute(char **args){
@@ -62,6 +39,14 @@ int turtle_execute(char **args){
 
     else if (strcmp(args[0], "pwd")==0){
         pwd();
+    }
+
+    else if (strcmp(args[0], "echo")==0){
+        echo(args);
+    }
+
+    else if (strcmp(args[0], "ls") == 0){
+        ls(args);
     }
 }
 
