@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <sys/types.h> 
 #include <sys/wait.h>
-#include <limits.h>
+#include <linux/limits.h>
 
-#include "inbuilts.h"
+#include "header.h"
 
 int get_home_directory(){
 
@@ -25,7 +25,7 @@ int display_prompt(){
 }
 
 int turtle_execute(char **args){
-    int i;
+    
     if (args[0] == NULL){
         return 1;
     }
@@ -47,6 +47,25 @@ int turtle_execute(char **args){
 
     else if (strcmp(args[0], "ls") == 0){
         ls(args);
+    }
+
+    else{
+        printf("step 1: comes to the else portion\n");
+        int fg = 1;
+        int i=0;
+
+
+        while(args[i]){
+            if (strcmp(args[i], "&")==0){
+                fg = 0;
+                args[i] = NULL;
+                break;
+            }
+            i++;
+        }
+
+        launch(args, fg);
+
     }
 }
 
