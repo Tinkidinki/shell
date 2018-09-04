@@ -53,6 +53,15 @@ int turtle_execute(char **args){
         remindme(args);
     }
 
+    else if(strcmp(args[0], "pinfo")==0){
+        if (args[1]){
+            pinfo(atoi(args[1]));
+        }
+        else{
+            pinfo(getpid());
+        }
+    }
+
     else{
         printf("step 1: comes to the else portion\n");
         int fg = 1;

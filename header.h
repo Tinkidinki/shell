@@ -7,5 +7,6 @@ int echo(char **args);
 int ls(char **args);
 int launch(char **args, int fg);
 int remindme(char** args);
+int pinfo(int pid);
 
 #endif // INBUILTS_H_
