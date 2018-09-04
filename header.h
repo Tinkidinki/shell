@@ -6,5 +6,6 @@ int pwd();
 int echo(char **args);
 int ls(char **args);
 int launch(char **args, int fg);
+int remindme(char** args);
 
 #endif // INBUILTS_H_

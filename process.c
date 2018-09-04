@@ -12,6 +12,7 @@ int launch(char** args, int fg){
     printf("step 2 launch is called\n");
     printf("the command:%s\n", args[0]);
     int wpid,pid, status;
+    
 
     pid = fork();
     if (pid==0){
@@ -30,7 +31,15 @@ int launch(char** args, int fg){
                 do{
                     wpid = waitpid(pid, &status, WUNTRACED);
                 } while (!WIFEXITED(status) && !WIFSIGNALED(status));
-                printf("Background process complete\n");
+
+                char name[500];
+                char filename[500];
+                char proc[] = "/proc/";
+                char status[] = "/status";
+                
+                printf("\n Background process complete\n");
+                printf("Process id: %d\n", pid);
+            
 
             }
 

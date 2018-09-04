@@ -49,6 +49,10 @@ int turtle_execute(char **args){
         ls(args);
     }
 
+    else if(strcmp(args[0], "remindme") == 0){
+        remindme(args);
+    }
+
     else{
         printf("step 1: comes to the else portion\n");
         int fg = 1;
