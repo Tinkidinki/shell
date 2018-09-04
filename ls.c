@@ -84,8 +84,6 @@ int ls(char **args){
         arg++;
     }
 
-    printf("l value:%d\n", l);
-    printf("a value:%d\n", a);
 
     struct stat my_stat;
     struct tm local_time;

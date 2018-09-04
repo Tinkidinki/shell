@@ -9,17 +9,22 @@
 #include <limits.h>
 
 int cd(char **args){
-    printf("cd function called\n");
 
-    // if (strcpy(args[1], ".")==0){
-    //     //
-    // }
-
+    
     if (!args[1]){
-        ;
+        if (chdir(home_directory)){
+            perror("turtle");
+        }
     }
+
+    else if (args[1][0]=='~'){
+        if (chdir(home_directory)){
+            perror("turtle");
+        }
+    }
+
     else if (chdir(args[1]) != 0){
-        perror("turtle: ");
+        perror("turtle");
     }
 
     return 1;
@@ -27,7 +32,6 @@ int cd(char **args){
 
 int pwd(){
     char directory[PATH_MAX];
-    printf ("pwd called\n");
     if (getcwd(directory, sizeof(directory))!=NULL){
         printf("%s\n", directory);
     }

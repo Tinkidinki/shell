@@ -9,14 +9,12 @@
 #include "header.h"
 
 int launch(char** args, int fg){
-    printf("step 2 launch is called\n");
-    printf("the command:%s\n", args[0]);
+
     int wpid,pid, status;
     
 
     pid = fork();
     if (pid==0){
-        printf("step 3: enters the child process\n");
         
         if (fg){
             execvp(args[0], args);

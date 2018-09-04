@@ -5,24 +5,11 @@
 #include <sys/types.h> 
 #include <sys/wait.h>
 #include <linux/limits.h>
+#include <stdbool.h>
+#include <pwd.h>
 
 #include "header.h"
 
-int get_home_directory(){
-
-}
-
-int display_prompt(){
-    char directory[PATH_MAX];
-    
-    if (getcwd(directory, sizeof(directory))!=NULL){
-        printf("%s>", directory);
-    }
-    else{
-        perror("getcwd() error");
-    }
-    
-}
 
 int turtle_execute(char **args){
     
@@ -31,10 +18,7 @@ int turtle_execute(char **args){
     }
     
     else if (strcmp(args[0], "cd")==0){
-        printf("Args[0] contents:%s\n", args[0]);
         cd(args);
-        printf ("comes back here?\n");
-        return 1;
     }
 
     else if (strcmp(args[0], "pwd")==0){
@@ -63,7 +47,6 @@ int turtle_execute(char **args){
     }
 
     else{
-        printf("step 1: comes to the else portion\n");
         int fg = 1;
         int i=0;
 
@@ -133,9 +116,7 @@ int turtle_loop(){
     do{
         display_prompt();
         line = turtle_read_line();
-        printf("line: %s\n", line);
-        args = turtle_split_line(line);
-        //printf("%s,%s", args[0], args[1]);        
+        args = turtle_split_line(line);       
         status = turtle_execute(args);
     } while(status);
 
@@ -143,6 +124,7 @@ int turtle_loop(){
 }
 
 int main(){
+    get_home_directory();
     turtle_loop();
     return 0;
 }

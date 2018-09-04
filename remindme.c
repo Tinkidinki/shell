@@ -14,12 +14,9 @@ int remindme(char** args){
     pid = fork();
     
     if (pid==0){
-        printf("Enters the first fork\n");
         pid = fork();
 
         if (pid==0){
-
-            printf("Enters the second fork \n");
 
             int seconds = atoi(args[1]);
             sleep(seconds);
