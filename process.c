@@ -11,12 +11,31 @@
 int launch(char** args, int fg){
     printf("step 2 launch is called\n");
     printf("the command:%s\n", args[0]);
-    int pid, status;
+    int wpid,pid, status;
 
     pid = fork();
     if (pid==0){
         printf("step 3: enters the child process\n");
-        execvp(args[0], args);
+        
+        if (fg){
+            execvp(args[0], args);
+        }
+
+        else{
+            pid = fork();
+            if (pid == 0){
+                execvp(args[0], args);
+            }
+            else{
+                do{
+                    wpid = waitpid(pid, &status, WUNTRACED);
+                } while (!WIFEXITED(status) && !WIFSIGNALED(status));
+                printf("Background process complete\n");
+
+            }
+
+        }
+    
     }
     else{
         if (fg){
