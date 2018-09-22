@@ -49,6 +49,7 @@ int launch(char** args, int fg){
             
             if( waitpid( pid, &status, 0 ) == -1 ) {
   				perror( "waitpid" );
+                return -1;
 			} 
 
         }

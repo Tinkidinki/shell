@@ -61,7 +61,11 @@ int turtle_execute(char **args){
             i++;
         }
 
-        launch(args, fg);
+        int status = launch(args, fg);
+        if (status == -1){
+            printf("Command does not exist\n");
+            exit(0);
+        }
 
     }
 }
