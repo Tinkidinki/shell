@@ -11,6 +11,7 @@
 #include "header.h"
 
 
+
 int turtle_execute(char **args){
     
     if (args[0] == NULL){
@@ -116,7 +117,14 @@ int turtle_loop(){
     do{
         display_prompt();
         line = turtle_read_line();
-        args = turtle_split_line(line);       
+        args = turtle_split_line(line);
+        print_list(args);
+        redirect(args);
+        print_list(args);
+        printf("infiles\n");
+        printf("%s, %s, %s\n", infiles[0], infiles[1], infiles[2]);
+        printf("outfiles\n");
+        printf("%s, %s\n", outfiles[0], outfiles[1]);
         status = turtle_execute(args);
     } while(status);
 

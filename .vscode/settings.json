@@ -3,5 +3,6 @@
         "stdio.h": "c",
         "limits.h": "c"
     },
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "C_Cpp.errorSquiggles": "Disabled"
 }

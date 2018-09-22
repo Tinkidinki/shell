@@ -49,3 +49,11 @@ int display_prompt(){
     
     printf("%s ", prompt);
 }
+
+void print_list(char** list){
+    int i=0;
+    while(list[i]){
+        printf("%s\n", list[i]);
+        i++;
+    }
+}
