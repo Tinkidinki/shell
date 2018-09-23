@@ -20,6 +20,7 @@ int finish_redirect();
 char home_directory[500];
 char** infiles;
 char** outfiles;
+char** appendfiles;
 int stdin_copy, stdout_copy;
 
 #endif // INBUILTS_H_
