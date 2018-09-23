@@ -15,9 +15,11 @@ int get_home_directory();
 bool starts_with(const char *a, const char *b);
 int display_prompt();
 void print_list(char** list);
+int finish_redirect();
 
 char home_directory[500];
-char infiles[100][100];
-char outfiles[100][100];
+char** infiles;
+char** outfiles;
+int stdin_copy, stdout_copy;
 
 #endif // INBUILTS_H_

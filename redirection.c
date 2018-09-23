@@ -25,6 +25,8 @@ void remove_element(char** args, int index){
 int redirect(char** args){
     //printf("inside redirect\n");
     //print_list(args);
+    infiles = malloc(64 * sizeof(char*));
+    outfiles = malloc(64 * sizeof(char*));
 
     // removing the in and out files
     int i=0;
@@ -33,7 +35,7 @@ int redirect(char** args){
     while(args[i]){
         if (strcmp(args[i], "<")==0){
             // printf("Saw <\n");
-            strcpy(infiles[in], args[i+1]);
+            infiles[in] = args[i+1];
             remove_element(args, i);
             remove_element(args, i);
             // print_list(args);
@@ -41,7 +43,7 @@ int redirect(char** args){
         }
         else if (strcmp(args[i], ">")==0){
             // printf("Saw >\n");
-            strcpy(outfiles[out], args[i+1]);
+            outfiles[out] = args[i+1];
             remove_element(args, i);
             remove_element(args, i);
             // print_list(args);
@@ -51,8 +53,10 @@ int redirect(char** args){
             i++;
         }
     }
-    strcpy(infiles[in], "\0");
-    strcpy(outfiles[out], "\0");
+    // strcpy(infiles[in], "\0");
+    // strcpy(outfiles[out], "\0");
+    infiles[in] = NULL;
+    outfiles[out] = NULL;
 
 //----------------------------------Old Implementation---------------------------------
     // redirecting to in and out files
@@ -84,7 +88,18 @@ int redirect(char** args){
     // }
 //----------------------------------------------------------------------------------------
 
+    // Trying output redirection
+    out = 0;
+    stdout_copy = dup(1);
+    if (outfiles[out]){
+        close(1);
+        open(outfiles[out], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    }
 
+    return 0;
 }
 
-
+int finish_redirect(){
+    close(1);
+    dup2(stdout_copy, 1);
+}

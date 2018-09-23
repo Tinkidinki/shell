@@ -123,20 +123,21 @@ int turtle_loop(){
         line = turtle_read_line();
         args = turtle_split_line(line);
 
-        printf("BEFORE REMOVING FILES\n");
-        print_list(args);
+        // printf("BEFORE REMOVING FILES\n");
+        // print_list(args);
         redirect(args);
-        printf("AFTER REMOVING FILES\n");
-        print_list(args);
-        printf("________________________________________\n");
+        // printf("AFTER REMOVING FILES\n");
+        // print_list(args);
+        // printf("________________________________________\n");
         //-----------Error detecting------------------------------------------
         // print_list(args);
         // printf("infiles\n");
-        // printf("%s, %s, %s\n", infiles[0], infiles[1], infiles[2]);
+        // print_list(infiles);
         // printf("outfiles\n");
-        // printf("%s, %s\n", outfiles[0], outfiles[1]);
+        // print_list(outfiles);
         //-------------------------------------------------------------------
         status = turtle_execute(args);
+        finish_redirect();
     } while(status);
 
     return 1;
