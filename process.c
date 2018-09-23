@@ -37,8 +37,6 @@ int launch(char** args, int fg){
                 
                 printf("\n Background process complete\n");
                 printf("Process id: %d\n", pid);
-            
-
             }
 
         }
@@ -51,7 +49,6 @@ int launch(char** args, int fg){
   				perror( "waitpid" );
                 return -1;
 			} 
-
         }
     }
 

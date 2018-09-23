@@ -13,18 +13,18 @@
 
 void remove_element(char** args, int index){
     int i = index;
-    printf("After removing:%s\n", args[i]);
+    // printf("After removing:%s\n", args[i]);
     while(args[i]){
         args[i] = args[i+1];
         i++;
     }
-    print_list(args);
-    printf("---------------\n");
+    // print_list(args);
+    // printf("---------------\n");
 }
 
 int redirect(char** args){
-    printf("inside redirect\n");
-    print_list(args);
+    //printf("inside redirect\n");
+    //print_list(args);
 
     // removing the in and out files
     int i=0;
@@ -32,19 +32,19 @@ int redirect(char** args){
     int out=0;
     while(args[i]){
         if (strcmp(args[i], "<")==0){
-            printf("Saw <\n");
+            // printf("Saw <\n");
             strcpy(infiles[in], args[i+1]);
             remove_element(args, i);
             remove_element(args, i);
-            print_list(args);
+            // print_list(args);
             in++;
         }
         else if (strcmp(args[i], ">")==0){
-            printf("Saw >\n");
+            // printf("Saw >\n");
             strcpy(outfiles[out], args[i+1]);
             remove_element(args, i);
             remove_element(args, i);
-            print_list(args);
+            // print_list(args);
             out++;
         }
         else{
@@ -54,21 +54,22 @@ int redirect(char** args){
     strcpy(infiles[in], "\0");
     strcpy(outfiles[out], "\0");
 
+//----------------------------------Old Implementation---------------------------------
     // redirecting to in and out files
     // in files
-    in = 0;
-    int fi;
-    //while(infiles[in]){
-        fi = open(infiles[0], O_RDONLY);
-        printf("File descriptor:%d\n", fi);
-        if (fi == -1){
-            perror("Input file  could not be opened\n");
-            return 0;
-        }
-        if (dup2(fi, 0)!=0){
-            perror("dup2 failed");
-        }
-        in++;
+    // in = 0;
+    // int fi;
+    // //while(infiles[in]){
+        // fi = open(infiles[0], O_RDONLY);
+        // printf("File descriptor:%d\n", fi);
+        // if (fi == -1){
+        //     perror("Input file  could not be opened\n");
+        //     return 0;
+        // }
+        // if (dup2(fi, 0)!=0){
+        //     perror("dup2 failed");
+        // }
+        // in++;
     //}
 
     // out files
@@ -81,6 +82,8 @@ int redirect(char** args){
     //     }
     //     out++;
     // }
+//----------------------------------------------------------------------------------------
+
 
 }
 
