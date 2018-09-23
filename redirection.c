@@ -70,35 +70,6 @@ int redirect(char** args){
     outfiles[out] = NULL;
     appendfiles[app] = NULL;
 
-//----------------------------------Old Implementation---------------------------------
-    // redirecting to in and out files
-    // in files
-    // in = 0;
-    // int fi;
-    // //while(infiles[in]){
-        // fi = open(infiles[0], O_RDONLY);
-        // printf("File descriptor:%d\n", fi);
-        // if (fi == -1){
-        //     perror("Input file  could not be opened\n");
-        //     return 0;
-        // }
-        // if (dup2(fi, 0)!=0){
-        //     perror("dup2 failed");
-        // }
-        // in++;
-    //}
-
-    // out files
-    // out = 0;
-    // int fo;
-    // while(outfiles[out]){
-    //     fo = open(outfiles[out], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    //     if (dup2(fo, 1)!=1){
-    //         perror("dup2 failed");
-    //     }
-    //     out++;
-    // }
-//----------------------------------------------------------------------------------------
 
     // Trying output redirection
     out = 0;

@@ -122,22 +122,10 @@ int turtle_loop(){
         display_prompt();
         line = turtle_read_line();
         args = turtle_split_line(line);
-
-        // printf("BEFORE REMOVING FILES\n");
-        // print_list(args);
-        redirect(args);
-        // printf("AFTER REMOVING FILES\n");
-        // print_list(args);
-        // printf("________________________________________\n");
-        //-----------Error detecting------------------------------------------
-        // print_list(args);
-        // printf("infiles\n");
-        // print_list(infiles);
-        // printf("outfiles\n");
-        // print_list(outfiles);
-        //-------------------------------------------------------------------
-        status = turtle_execute(args);
-        finish_redirect();
+        split_by_pipe(args);
+        // redirect(args);
+        // status = turtle_execute(args);
+        // finish_redirect();
     } while(status);
 
     return 1;

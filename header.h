@@ -16,11 +16,12 @@ bool starts_with(const char *a, const char *b);
 int display_prompt();
 void print_list(char** list);
 int finish_redirect();
+int split_by_pipe(char** args);
 
 char home_directory[500];
 char** infiles;
 char** outfiles;
 char** appendfiles;
 int stdin_copy, stdout_copy;
-
+char*** pipe_split;
 #endif // INBUILTS_H_
