@@ -74,6 +74,7 @@ int redirect(char** args){
     // Trying output redirection
     out = 0;
     stdout_copy = dup(1);
+
     if (outfiles[out]){
         close(1);
         open(outfiles[out], O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -102,4 +103,5 @@ int finish_redirect(){
     dup2(stdout_copy, 1);
     close(0);
     dup2(stdin_copy, 0);
+    return 0;
 }

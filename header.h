@@ -17,7 +17,10 @@ int display_prompt();
 void print_list(char** list);
 int finish_redirect();
 int split_by_pipe(char** args);
+int control_flow(char** args, int precedes);
+int turtle_execute(char** args);
 
+int status;
 char home_directory[500];
 char** infiles;
 char** outfiles;

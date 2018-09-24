@@ -115,6 +115,8 @@ int turtle_loop(){
     char *line;
     char **args;
     int status =1;
+    int num_expressions;
+    int exp;
 
     // Set the home directory
     
@@ -122,10 +124,17 @@ int turtle_loop(){
         display_prompt();
         line = turtle_read_line();
         args = turtle_split_line(line);
-        split_by_pipe(args);
-        // redirect(args);
-        // status = turtle_execute(args);
-        // finish_redirect();
+        num_expressions = split_by_pipe(args);
+        
+    
+        for (exp = 0; exp < num_expressions-1; exp++){
+            print_list(pipe_split[exp]);
+            control_flow(pipe_split[exp], 1); // precedes a pipe
+        }
+        
+        print_list(pipe_split[num_expressions-1]);
+        control_flow(pipe_split[num_expressions - 1], 0); // does not precede a pipe
+    
     } while(status);
 
     return 1;

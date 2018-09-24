@@ -16,6 +16,7 @@ int split_by_pipe(char** args){
     int i = 0;
     int p = 0;
     int count = 0;
+    
     while(args[i]){
         if (strcmp(args[i], "|")!=0){
             pipe_split[p][count] = args[i];
@@ -30,11 +31,10 @@ int split_by_pipe(char** args){
         i++;
     }
     int num_expressions = p+1;
-    int exp;
-    for (exp = 0; exp < num_expressions-1; exp++){
-        control_flow(pipe_split[exp], 1); // precedes a pipe
-    }
-    control_flow(pipe_split[num_expressions - 1], 0); // does not precede a pipe
 
-    return 0;
+    for (int exp=0; exp< num_expressions; exp++){
+        print_list(pipe_split[exp]);
+        printf("___________________\n");
+    }
+    return num_expressions;
 }
