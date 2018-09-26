@@ -19,13 +19,13 @@ int finish_redirect();
 int split_by_pipe(char** args);
 int control_flow(char** args, int precedes);
 int turtle_execute(char** args);
+void copy_streams();
 
 int status;
 char home_directory[500];
 char** infiles;
 char** outfiles;
 char** appendfiles;
-int stdin_copy_red, stdout_copy_red;
-int stdin_copy_pipe, stdout_copy_pipe;
+int stdin_copy, stdout_copy;
 char*** pipe_split;
 #endif // INBUILTS_H_

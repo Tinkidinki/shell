@@ -122,22 +122,16 @@ int turtle_loop(){
     
     do{
         display_prompt();
+        copy_streams();
         line = turtle_read_line();
         args = turtle_split_line(line);
         num_expressions = split_by_pipe(args);
-        printf("num expressions:%d\n", num_expressions);
     
         for (exp = 0; exp < num_expressions-1; exp++){
-            printf("Inside for loop\n");
-            print_list(pipe_split[exp]);
             control_flow(pipe_split[exp], 1); // precedes a pipe
         }
-        printf("outside for loop\n");
-        print_list(pipe_split[num_expressions-1]);
-        redirect(args);
-        status = turtle_execute(args);
-        finish_redirect();
-        // control_flow(pipe_split[num_expressions - 1], 0); // does not precede a pipe
+        
+        control_flow(pipe_split[num_expressions - 1], 0); // does not precede a pipe
     
     } while(status);
 

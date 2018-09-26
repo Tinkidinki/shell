@@ -57,3 +57,8 @@ void print_list(char** list){
         i++;
     }
 }
+
+void copy_streams(){
+    stdin_copy = dup(0);
+    stdout_copy = dup(1);
+}

@@ -73,7 +73,6 @@ int redirect(char** args){
 
     // Trying output redirection
     out = 0;
-    stdout_copy_red = dup(1);
 
     if (outfiles[out]){
         close(1);
@@ -81,7 +80,6 @@ int redirect(char** args){
     }
 
     app = 0;
-    stdout_copy_red = dup(1);
     if (appendfiles[app]){
         close(1);
         open(appendfiles[app], O_WRONLY | O_CREAT | O_APPEND, 0644);
@@ -89,7 +87,6 @@ int redirect(char** args){
 
     // Trying input redirection
     in = 0;
-    stdin_copy_red = dup(0);
     if (infiles[in]){
         close(0);
         open(infiles[in], O_RDONLY);
@@ -99,13 +96,9 @@ int redirect(char** args){
 }
 
 int finish_redirect(){
-    printf("Finish redirect gets called\n");
-    printf("stdout_copy_red:%d\n", stdout_copy_red);
+    close(0);
+    dup2(stdin_copy, 0);
     close(1);
-    if(dup2(stdout_copy_red, 1)!=1)
-        printf("Dup2 error\n");
-    // close(0);
-    // dup2(stdin_copy_red, 0);
-    printf("Finish redirect done\n");
+    dup2(stdout_copy, 1);
     return 0;
 }
