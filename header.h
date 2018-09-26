@@ -25,6 +25,7 @@ char home_directory[500];
 char** infiles;
 char** outfiles;
 char** appendfiles;
-int stdin_copy, stdout_copy;
+int stdin_copy_red, stdout_copy_red;
+int stdin_copy_pipe, stdout_copy_pipe;
 char*** pipe_split;
 #endif // INBUILTS_H_

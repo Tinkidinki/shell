@@ -14,13 +14,13 @@ int control_flow(char** args, int precedes){
 
     printf("Inside control flow\n");
 
-    int stdin_copy = dup(0);
-    if (stdin_copy==-1)
-        perror("stdin_copy was not made\n");
+    int stdin_copy_pipe = dup(0);
+    if (stdin_copy_pipe==-1)
+        perror("stdin_copy_pipe was not made\n");
 
-    int stdout_copy = dup(1);
-    if (stdout_copy==-1)
-        perror("stdout_copy was not made\n");
+    int stdout_copy_pipe = dup(1);
+    if (stdout_copy_pipe==-1)
+        perror("stdout_copy_pipe was not made\n");
 
     if (precedes){
         printf("precedes\n");
@@ -34,31 +34,32 @@ int control_flow(char** args, int precedes){
         if (dup2(fd[1], 1)!=1)
             perror("dup2 error 1 to p_in\n");
 
-        // redirect(args);
+        redirect(args);
         status = turtle_execute(args);
         printf("done FIRST\n");
-        // finish_redirect();
+        finish_redirect();
 
         close(0);
         if (dup2(fd[0], 0)!=0)
             perror("dup2 error 0 to p_out\n");
         
         close(1);
-        if (dup2(stdout_copy, 1)!=1)
-            perror("dup2 error 1 to stdout_copy\n");
+        if (dup2(stdout_copy_pipe, 1)!=1)
+            perror("dup2 error 1 to stdout_copy_pipe\n");
 
         printf("After the if part\n");
     }
 
     else{
         
-        // redirect(args);
+        redirect(args);
         status = turtle_execute(args);
-        printf("done SECOND\n");
         // finish_redirect();
-        if (dup2(stdin_copy, 0)!=1)
-            perror("dup2 error 1 to stdin_copy");
-
+        printf("done SECOND\n");
+        
+        // if (dup2(stdin_copy_pipe, 0)!=1)
+        //     perror("dup2 error 1 to stdin_copy_pipe");
+        //finish_redirect();
     }
 
     return 0;
