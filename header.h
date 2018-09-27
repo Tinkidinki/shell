@@ -28,4 +28,5 @@ char** outfiles;
 char** appendfiles;
 int stdin_copy, stdout_copy;
 char*** pipe_split;
+int fd[2];
 #endif // INBUILTS_H_

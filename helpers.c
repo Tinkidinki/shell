@@ -36,6 +36,7 @@ int display_prompt(){
     
     if (getcwd(directory, sizeof(directory))!=NULL){
         
+       
         if (starts_with(directory, home_directory)){
             sprintf(prompt, "<%s@%s:~%s>", username, hostname, &directory[strlen(home_directory)]);
         }
@@ -47,7 +48,7 @@ int display_prompt(){
         perror("getcwd() error");
     }
     
-    printf("%s ", prompt);
+    printf("\033[0;31m%s\033[0m ", prompt);
 }
 
 void print_list(char** list){

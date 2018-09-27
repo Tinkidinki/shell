@@ -16,26 +16,26 @@ int control_flow(char** args, int precedes){
 
     if (precedes){
         printf("precedes\n");
-        int fd[2];
+        //int fd[2];
         
         if (pipe(fd) == -1){
             fprintf(stderr, "pipe failed\n"); // Make a pipe
         }
 
-        close(1);
+        close(fd[0]); // Close the exit of the pipe
         if (dup2(fd[1], 1)!=1)   // Point 1 to the entry of the pipe
             perror("dup2 error 1 to p_in\n");
+        
 
         redirect(args);
         status = turtle_execute(args); // Execute the args
         printf("done FIRST\n");
         finish_redirect();
 
-        close(0);
         if (dup2(fd[0], 0)!=0)   // Point 0 to the exit of the pipe
             perror("dup2 error 0 to p_out\n");
+        close(fd[1]); // Close the entry of the pipe
         
-        close(1);
         if (dup2(stdout_copy, 1)!=1)  // Point 1 back to std output
             perror("dup2 error 1 to stdin_copy\n");
 
@@ -45,6 +45,7 @@ int control_flow(char** args, int precedes){
     else{
         
         redirect(args);
+        printf("reached the else part\n");
         status = turtle_execute(args);
         finish_redirect();
         printf("done SECOND\n");

@@ -13,6 +13,12 @@
 
 
 int turtle_execute(char **args){
+    printf("Went into turtle execute\n");
+
+    if (strcmp(args[0], "quit")){
+        printf("Exiting the turtle shell. Have a nice day!\n");
+        return 0;
+    }
     
     if (args[0] == NULL){
         return 1;
@@ -48,11 +54,13 @@ int turtle_execute(char **args){
     }
 
     else{
+        printf("Went in the else part\n");
         int fg = 1;
         int i=0;
 
 
         while(args[i]){
+            printf("In the while loop for &\n");
             if (strcmp(args[i], "&")==0){
                 fg = 0;
                 args[i] = NULL;
@@ -116,7 +124,9 @@ int turtle_loop(){
     char **args;
     int status =1;
     int num_expressions;
+    signal(SIGINT, SIG_IGN);
     int exp;
+    
 
     // Set the home directory
     

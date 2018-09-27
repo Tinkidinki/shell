@@ -9,14 +9,19 @@
 #include "header.h"
 
 int launch(char** args, int fg){
-
+    printf("Launched\n");
     int wpid,pid, status;
     
 
     pid = fork();
     if (pid==0){
-        
+        signal(SIGINT, SIG_DFL);
         if (fg){
+            printf("This is in the fg portion\n");
+            char* path = "/proc/self/fd/0";
+            char buf[1000];
+            readlink(path, buf, 1000);
+            printf("0 points to: %s\n", buf);
             execvp(args[0], args);
         }
 
@@ -44,13 +49,13 @@ int launch(char** args, int fg){
     }
     else{
         if (fg){
-            
+            printf("Parent of fg\n");
             if( waitpid( pid, &status, 0 ) == -1 ) {
-  				perror( "waitpid" );
+  				printf( "waitpid\n" );
                 return -1;
 			} 
         }
     }
-
+    printf("Done with the else part\n");
     return 1;
 }
